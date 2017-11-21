@@ -5,15 +5,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
 {
     private Button page2Button;
     private Button page3Button;
     private Button page4Button;
+    private EditText elementsNum;
 
     private MyObject obj;
     private int[] ar;
+
+    private Random random;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -21,19 +28,20 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
 
-        this.ar = new int[1000];
-        for(int i = 0; i < this.ar.length; i++)
-        {
-            this.ar[i] = i+1;
-        }
+//        this.ar = new int[1000];
+//        for(int i = 0; i < this.ar.length; i++)
+//        {
+//            this.ar[i] = i+1;
+//        }
 
-        this.printArray();
+//        this.printArray();
 
         this.obj = new MyObject("Mike");
         System.out.println(this.obj);
         this.page2Button = (Button)this.findViewById(R.id.page2Button);
         this.page3Button = (Button)this.findViewById(R.id.page3Button);
         this.page4Button = (Button)this.findViewById(R.id.page4Button);
+        this.elementsNum = (EditText)this.findViewById(R.id.elementsNumTextEdit);
     }
 
     private void printArray()
@@ -49,7 +57,7 @@ public class MainActivity extends AppCompatActivity
     {
         super.onRestart();
         //System.out.println(this.obj.getName());
-        this.printArray();
+//        this.printArray();
     }
 
     //-(IBAction) onNextPageButtonPressed:sender:UIView
@@ -77,6 +85,27 @@ public class MainActivity extends AppCompatActivity
             i.putExtra("obj", this.obj);
             this.startActivity(i);
         }
+    }
+
+    public void onSubmitButtonPressed(View v){
+        random = new Random();
+        String elements = elementsNum.getText().toString();
+        if(!elements.isEmpty()){
+            this.ar = new int[Integer.parseInt(elements)];
+            for(int i = 0; i < this.ar.length; i++)
+            {
+                this.ar[i] = random.nextInt(10000);
+            }
+//            printArray();
+            Intent i = new Intent(this, Screen2.class);
+            i.putExtra("myAR", this.ar);
+            this.startActivity(i);
+        }
+        else {
+            Toast toast = Toast.makeText(this, "Please input some number!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+
     }
 
 }

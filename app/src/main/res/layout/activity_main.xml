@@ -33,5 +33,20 @@
             android:layout_height="wrap_content"
             android:onClick="onNextPageButtonPressed"
             android:text="Goto Page 4" />
+
+        <EditText
+            android:id="@+id/elementsNumTextEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Number of Elements?"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSubmitButtonPressed"
+            android:text="Submit" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
